@@ -1,0 +1,14 @@
+{
+    "name": "mengxianghan/xuanyucms",
+    "authors": [
+        {
+            "name": "mengxianghan",
+            "email": "1056811341@qq.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "ramsey/uuid": "^3.8",
+        "smarty/smarty": "^3.1"
+    }
+}
