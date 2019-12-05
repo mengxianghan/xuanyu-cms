@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 05/12/2019 14:25:28
+ Date: 05/12/2019 16:10:07
 */
 
 SET NAMES utf8mb4;
@@ -66,7 +66,7 @@ CREATE TABLE `info_news`  (
   `is_recommend` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '推荐',
   `is_hot` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '热点',
   `external_links` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '外部链接',
-  `tags` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
+  `tag` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标签',
   `status` tinyint(1) NULL DEFAULT NULL COMMENT '状态',
   `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
@@ -77,7 +77,7 @@ CREATE TABLE `info_news`  (
 -- ----------------------------
 -- Records of info_news
 -- ----------------------------
-INSERT INTO `info_news` VALUES (1, 2, '测试1', '', '', '', '', '', '', '0', '0', NULL, '标签1,标签2', 1, 100, '2019-08-11 09:51:51', '2019-11-21 17:21:44');
+INSERT INTO `info_news` VALUES (1, 2, '测试tag', '', '', '', '', '', '', '0', '0', '', 'cms,后台,测试1234', 1, 100, '2019-08-11 09:51:51', '2019-12-05 16:04:21');
 INSERT INTO `info_news` VALUES (2, 3, '测试2', '', '', '', '', '', '', '0', '1', NULL, '', 1, 99, '2019-11-20 16:51:25', '2019-11-21 15:38:36');
 INSERT INTO `info_news` VALUES (3, 13, '标题', '副标题', 'SEO关键词', 'SEO描述', '<p><span style=\"color: rgba(0, 0, 0, 0.85); font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', \'PingFang SC\', \'Hiragino Sans GB\', \'Microsoft YaHei\', \'Helvetica Neue\', Helvetica, Arial, sans-serif, \'Apple Color Emoji\', \'Segoe UI Emoji\', \'Segoe UI Symbol\'; font-size: 14px; text-align: right; white-space: nowrap; background-color: #ffffff;\">内容</span></p>', '作者', '来源', '1', '0', '外部链接', '自由,民主', 1, 99, '2019-12-05 09:01:50', '2019-12-05 09:05:04');
 
@@ -101,29 +101,31 @@ INSERT INTO `info_single` VALUES (4, '公司简介', '<p><img src=\"http://xuany
 INSERT INTO `info_single` VALUES (5, '公司介绍', '<p>内容1...阿斯蒂芬阿斯蒂芬阿斯蒂芬</p>', '2019-11-29 16:37:03', '2019-11-29 16:37:03');
 
 -- ----------------------------
--- Table structure for info_tags
+-- Table structure for info_tag
 -- ----------------------------
-DROP TABLE IF EXISTS `info_tags`;
-CREATE TABLE `info_tags`  (
-  `tags` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标签',
+DROP TABLE IF EXISTS `info_tag`;
+CREATE TABLE `info_tag`  (
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '标签',
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
   `sort` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '排序',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `update_time` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
-  PRIMARY KEY (`tags`) USING BTREE
+  PRIMARY KEY (`name`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '信息-标签表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
--- Records of info_tags
+-- Records of info_tag
 -- ----------------------------
-INSERT INTO `info_tags` VALUES ('cms', '1', '100', '2019-07-20 09:50:44', '2019-07-20 09:50:44');
-INSERT INTO `info_tags` VALUES ('争辩', '1', '100', '2019-07-12 10:41:23', '2019-07-12 10:41:33');
-INSERT INTO `info_tags` VALUES ('台湾', '1', '100', '2019-07-12 11:34:36', '2019-07-12 11:34:36');
-INSERT INTO `info_tags` VALUES ('后台', '1', '100', '2019-07-12 11:27:48', '2019-07-12 11:27:48');
-INSERT INTO `info_tags` VALUES ('新闻', '1', '100', '2019-07-12 10:41:16', '2019-07-12 10:41:33');
-INSERT INTO `info_tags` VALUES ('核武器', '1', '100', '2019-07-12 10:41:26', '2019-07-12 10:41:33');
-INSERT INTO `info_tags` VALUES ('洗澡', '1', '100', '2019-07-12 11:34:36', '2019-07-12 11:34:36');
-INSERT INTO `info_tags` VALUES ('轩宇', '1', '100', '2019-07-14 19:07:53', '2019-07-14 19:07:53');
+INSERT INTO `info_tag` VALUES ('cms', '1', '100', '2019-12-05 16:04:21', '2019-12-05 16:04:21');
+INSERT INTO `info_tag` VALUES ('争辩', '1', '100', '2019-07-12 10:41:23', '2019-07-12 10:41:33');
+INSERT INTO `info_tag` VALUES ('台湾', '1', '100', '2019-07-12 11:34:36', '2019-07-12 11:34:36');
+INSERT INTO `info_tag` VALUES ('后台', '1', '100', '2019-12-05 16:04:21', '2019-12-05 16:04:21');
+INSERT INTO `info_tag` VALUES ('新闻', '1', '100', '2019-07-12 10:41:16', '2019-07-12 10:41:33');
+INSERT INTO `info_tag` VALUES ('核武器', '1', '100', '2019-07-12 10:41:26', '2019-07-12 10:41:33');
+INSERT INTO `info_tag` VALUES ('洗澡', '1', '100', '2019-07-12 11:34:36', '2019-07-12 11:34:36');
+INSERT INTO `info_tag` VALUES ('测试111', '1', '100', '2019-12-05 16:03:27', '2019-12-05 16:03:27');
+INSERT INTO `info_tag` VALUES ('测试1234', '1', '100', '2019-12-05 16:04:21', '2019-12-05 16:04:21');
+INSERT INTO `info_tag` VALUES ('轩宇', '1', '100', '2019-07-14 19:07:53', '2019-07-14 19:07:53');
 
 -- ----------------------------
 -- Table structure for info_template
@@ -362,6 +364,7 @@ INSERT INTO `sys_login_log` VALUES ('c970c6bc-b30b-4885-8d3a-23f4b7dfbb97', '6b5
 INSERT INTO `sys_login_log` VALUES ('d0eaf534-7cff-4c74-9dd9-74729d89c91f', 'd35ea05e-100e-4902-80f9-8106d602ec94', '2019-12-03 15:10:41');
 INSERT INTO `sys_login_log` VALUES ('d318662c-dd43-41d2-aee3-336f1ac54c58', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:38:56');
 INSERT INTO `sys_login_log` VALUES ('d5293102-7988-4d72-be4b-b705d36ee54b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:38:28');
+INSERT INTO `sys_login_log` VALUES ('d719b64a-1b7e-4b4e-afd4-16b5d26bd406', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 15:08:35');
 INSERT INTO `sys_login_log` VALUES ('e8c0d6f2-c466-4f5b-bbad-68d683bd3545', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-03 14:11:07');
 
 -- ----------------------------

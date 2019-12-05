@@ -66,7 +66,7 @@ class News extends MY_Controller
                 'is_recommend' => $this->input->post('is_recommend'),
                 'is_hot' => $this->input->post('is_hot'),
                 'external_links' => $this->input->post('external_links'),
-                'tags' => $this->input->post('tags'),
+                'tag' => $this->input->post('tag'),
                 'status' => $this->input->post('status'),
                 'sort' => $this->input->post('sort')
             );
