@@ -1,6 +1,8 @@
-# xuanyu CMS
+<p align="center">
+<img src="http://q219t1n5l.bkt.clouddn.com/logo.svg" height="200" />
+</p>
 
-<img src="https://github.com/mengxianghan/xuanyu-cms-front/blob/master/src/assets/images/logo.svg" height="200" />
+# xuanyu CMS
 
 xuanyu CMS是一款前后端分离快速后台开发框架，前端基于vue-ant-design，后端基于codeigniter轻量级php框架开发
 
