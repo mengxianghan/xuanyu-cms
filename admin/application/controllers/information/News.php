@@ -63,6 +63,7 @@ class News extends MY_Controller
                 'column_id' => $this->input->post('column_id'),
                 'author' => $this->input->post('author'),
                 'source' => $this->input->post('source'),
+                'thumb' => $this->input->post('thumb'),
                 'is_recommend' => $this->input->post('is_recommend'),
                 'is_hot' => $this->input->post('is_hot'),
                 'external_links' => $this->input->post('external_links'),

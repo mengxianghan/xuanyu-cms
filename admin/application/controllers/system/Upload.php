@@ -19,7 +19,6 @@ class Upload extends MY_Controller
     {
         try {
             $upload_dir_id = $this->input->get('upload_dir_id');
-            $orig_name = $this->input->get('orig_name');
             $id = $this->input->get('id');
             $where = array();
             $like = array();
@@ -28,9 +27,6 @@ class Upload extends MY_Controller
             }
             if ($id != '') {
                 $where['id'] = explode(',', $id);
-            }
-            if ($orig_name) {
-                $like['orig_name'] = $orig_name;
             }
             $result = $this->common->get_list(array(
                 'table' => 'upload',
@@ -102,9 +98,9 @@ class Upload extends MY_Controller
                 'image_size_str' => $data['image_size_str'],
                 'relative_path' => preg_replace($this->pattern, $this->replacement, "{$relative_path}/{$data['file_name']}")
             );
-            $result = $this->common->insert('upload', $values);
-            $res = array_merge($values, array('id' => $result['insert_id']));
-            return ajax(EXIT_SUCCESS, null, $res);
+            $this->common->insert('upload', $values);
+            //$res = array_merge($values, array('id' => $result['insert_id']));
+            return ajax(EXIT_SUCCESS, null, $values);
         } catch (Exception $e) {
             return ajax(EXIT_ERROR, $e->getMessage());
         }
