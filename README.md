@@ -7,8 +7,9 @@
 xuanyu CMS是一款前后端分离快速后台开发框架，前端基于vue-ant-design，后端基于codeigniter轻量级php框架开发
 
 具体功能请参考前端描述文件  
-xuanyu cms 前端请移步至 [https://github.com/mengxianghan/xuanyu-cms-front](https://github.com/mengxianghan/xuanyu-cms-front)
-
+前端请移步至  
+Github地址：[https://github.com/mengxianghan/xuanyu-cms-front](https://github.com/mengxianghan/xuanyu-cms-front)  
+码云地址：[https://gitee.com/1056811341/xuanyu-cms-front](https://gitee.com/1056811341/xuanyu-cms-front)
 ## 安装
 
 ```
