@@ -19,19 +19,13 @@ class Upload extends MY_Controller
     {
         try {
             $upload_dir_id = $this->input->get('upload_dir_id');
-            $id = $this->input->get('id');
             $where = array();
-            $like = array();
             if ($upload_dir_id != '') {
                 $where['upload_dir_id'] = explode(',', $upload_dir_id);
-            }
-            if ($id != '') {
-                $where['id'] = explode(',', $id);
             }
             $result = $this->common->get_list(array(
                 'table' => 'upload',
                 'where' => $where,
-                'like' => $like,
                 'order_by' => 'create_time desc'
             ));
             return ajax(EXIT_SUCCESS, null, $result);
@@ -41,6 +35,33 @@ class Upload extends MY_Controller
     }
 
     /**
+     * 获取回填列表
+     */
+    public function get_backfill_list()
+    {
+        try {
+            $field = $this->input->post('field');
+            if ($field == '') {
+                throw new Exception('参数不完整');
+            }
+            $where = array();
+            if ($field != '') {
+                $value = $this->input->post($field);
+                $where[$field] = $value != '' ? explode(',', $value) : array();
+            }
+            $result = $this->common->get_list(array(
+                'table' => 'upload',
+                'where' => $where,
+                'has_pagination' => '0'
+            ));
+            return ajax(EXIT_SUCCESS, null, $result);
+        } catch (Exception $e) {
+            return ajax(EXIT_ERROR, $e->getMessage());
+        }
+    }
+
+
+    /**
      * 上传
      */
     public function do_upload()
@@ -48,13 +69,12 @@ class Upload extends MY_Controller
         try {
             //权限验证
             //$this->permission->validate($this->config->item('auth_upload'));
+            $domain_name = $this->input->post('domain_name');
             $upload_dir = $this->input->post('upload_dir');
             $allowed_file_type = $this->input->post('allowed_file_type');
             $allowed_file_size = $this->input->post('allowed_file_size');
-            //相对
-            $relative_path = $upload_dir;
             //上传路径
-            $upload_path = preg_replace($this->pattern, $this->replacement, "../{$relative_path}/");
+            $upload_path = preg_replace($this->pattern, $this->replacement, "../{$upload_dir}/");
             $config['upload_path'] = $upload_path;
             //允许上传的文件类型
             $config['allowed_types'] = $allowed_file_type;
@@ -78,6 +98,7 @@ class Upload extends MY_Controller
             }
             $data = $this->upload->data();
             $upload_dir_id = $this->input->post('upload_dir_id');
+            $relative_path = preg_replace($this->pattern, $this->replacement, "{$upload_dir}/{$data['file_name']}");
             //写入数据库
             $values = array(
                 'id' => Uuid::uuid4(),
@@ -96,10 +117,10 @@ class Upload extends MY_Controller
                 'image_height' => $data['image_height'],
                 'image_type' => $data['image_type'],
                 'image_size_str' => $data['image_size_str'],
-                'relative_path' => preg_replace($this->pattern, $this->replacement, "{$relative_path}/{$data['file_name']}")
+                'relative_path' => $relative_path,
+                'web_path' => $domain_name . $relative_path
             );
             $this->common->insert('upload', $values);
-            //$res = array_merge($values, array('id' => $result['insert_id']));
             return ajax(EXIT_SUCCESS, null, $values);
         } catch (Exception $e) {
             return ajax(EXIT_ERROR, $e->getMessage());
