@@ -224,6 +224,12 @@ class Common_model extends CI_Model
                 if ($key == "find_in_set") {
                     $this->db->where("1", "1 and find_in_set($value)", FALSE);
                     continue;
+                } elseif ($key == "or_where") {
+                    if (is_array($value)) {
+                        $this->db->or_where_in($key, $value);
+                    } else {
+                        $this->db->or_where($key, $value);
+                    }
                 } else {
                     if (is_array($value)) {
                         $this->db->where_in($key, $value);
