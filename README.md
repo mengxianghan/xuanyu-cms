@@ -22,9 +22,4 @@ composer install
 修改数据库连接 `shared/config/database.php`  
 其他配置信息请移步至
 <a href="http://codeigniter.org.cn/user_guide/" target="_blank">Codeigniter 手册</a>
-进行配置  
-
-## 更新日志  
-1.0.0  
-`2019-12-05`  
-:boom: 对外第一个版本，提供cms的基本功能模块  
+进行配置
