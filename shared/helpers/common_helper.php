@@ -79,13 +79,7 @@ if (!function_exists('to_string')) {
         if (is_array($data)) {
             $newData = array();
             foreach ($data as $key => $value) {
-                if (is_array($value)) {//数组类型
-                    $newData[$key] = to_string($value);
-                } elseif (is_bool($value)) {//布尔类型
-                    $newData[$key] = $value ? 'true' : 'false';
-                } else {//其他
-                    $newData[$key] = (string)$value;
-                }
+                $newData[$key] = to_string($value);
             }
             return $newData;
         } elseif (is_bool($data)) {
@@ -114,5 +108,24 @@ if (!function_exists('request_search')) {
             $data = isset($arr[0][$name]) ? $arr[0][$name] : '';
         }
         return $data;
+    }
+}
+
+if (!function_exists('get_status')) {
+    /**
+     * 获取状态码
+     * @param $name
+     * @param $key
+     * @return mixed
+     */
+    function get_status($name, $key = '')
+    {
+        $ci =& get_instance();
+        $status = $ci->config->item($name, 'status');
+        if ($key == '') {
+            return $status['message'] . ',' . $status['code'];
+        } else {
+            return $status[$key];
+        }
     }
 }

@@ -6,7 +6,7 @@
  */
 
 $config['cache_lifetime'] = 60;
-$config['caching'] = true;
+$config['caching'] = false;
 $config['template_dir'] = APPPATH . 'views';
 $config['compile_dir'] = APPPATH . 'views_c';
 $config['cache_dir'] = APPPATH . 'cache/views';
