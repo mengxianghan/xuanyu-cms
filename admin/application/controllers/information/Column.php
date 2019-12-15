@@ -28,12 +28,10 @@ class Column extends MY_Controller
                 'has_pagination' => '0',
                 'join' => array('info_template it', 'it.id = ic.template_id', 'left')
             ));
-            $data = array(
-                'list' => list_to_tree($result['list'])
-            );
-            return ajax(EXIT_SUCCESS, null, $data);
+            $result['list'] = list_to_tree($result['list']);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -45,6 +43,9 @@ class Column extends MY_Controller
         try {
             $id = $this->inpt->post('id');
             $name = $this->inpt->post('name');
+            if ($name == '') {
+                throw new Exception('缺少参数', '1');
+            }
             $values = array(
                 'parent_id' => $this->inpt->post('parent_id'),
                 'name' => $name,
@@ -57,9 +58,9 @@ class Column extends MY_Controller
             } else {
                 $result = $this->common->insert('info_column', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -71,17 +72,18 @@ class Column extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             //检查是否含有下级
             $count = $this->common->count_all_results('info_column', "parent_id = $id");
-            if ($count > 0) { //存在下级，禁止删除
-                throw new Exception('存在下级数据，请勿删除！');
+            //存在下级，禁止删除
+            if ($count > 0) {
+                throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('info_column', array('id' => $id));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 }

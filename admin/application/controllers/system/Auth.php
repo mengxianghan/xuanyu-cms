@@ -17,7 +17,7 @@ class Auth extends MY_Controller
             $id = $this->input->get('id'); // 角色|用户 id
             $type = $this->input->get('type'); // 类型：1=角色，2=用户
             if ($id == '' || $type == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             // 是否超级管理员
             $is_super = $this->_is_super($id, $type);
@@ -49,7 +49,7 @@ class Auth extends MY_Controller
                     // 获取用户信息
                     $user_info = $this->_get_user_info($id);
                     if (!$user_info) {
-                        throw new Exception('用户不存在');
+                        throw new Exception('用户不存在', '1');
                     }
                     if ($user_info && $user_info['id']) {
                         $role_id_arr = $user_info['role_id'] ? explode(',', $user_info['role_id']) : [];
@@ -68,11 +68,10 @@ class Auth extends MY_Controller
                 'group_by' => $group_by,
                 'has_pagination' => '0'
             ));
-            // die($this->db->last_query());
             $result['list'] = list_to_tree($result['list']);
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -85,7 +84,7 @@ class Auth extends MY_Controller
             $id = $this->input->get('id');
             $type = $this->input->get('type');
             if ($id == '' || $type == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $result = $this->common->get_list(array(
                 'table' => 'sys_auth',
@@ -95,9 +94,9 @@ class Auth extends MY_Controller
                 ),
                 'has_pagination' => '0'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -111,7 +110,7 @@ class Auth extends MY_Controller
             $type = $this->input->post('type');
             $values = $this->input->post('values');
             if ($id == '' || $type == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             // 删除当前用户权限
             $this->common->delete('sys_auth', array('id' => $id, 'type' => $type));
@@ -119,9 +118,9 @@ class Auth extends MY_Controller
             if (count($values)) {
                 $this->db->insert_batch('sys_auth', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功');
+            $this->ajax_output->output('0', '保存成功');
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

@@ -58,7 +58,7 @@ $autoload['packages'] = array(BASEPATH . '../shared');
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'token', 'permission');
+$autoload['libraries'] = array('database', 'token', 'permission', 'logs', 'ajax_output');
 
 /*
 | -------------------------------------------------------------------

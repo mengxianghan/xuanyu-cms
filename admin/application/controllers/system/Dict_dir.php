@@ -21,9 +21,9 @@ class Dict_dir extends MY_Controller
                 'order_by' => 'sort asc,create_time asc',
             ));
             $result['list'] = list_to_tree($result['list']);
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ class Dict_dir extends MY_Controller
             $name = $this->input->post('name');
             $key = $this->input->post('key');
             if ($parent_id == '' || $name == '' || $key == '') {
-                throw new Exception('缺少参数');
+                throw new Exception('缺少参数', '1');
             }
             $values = array(
                 'name' => $name,
@@ -58,9 +58,9 @@ class Dict_dir extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_dict_dir', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -72,22 +72,22 @@ class Dict_dir extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             // 检查是否含有下级
             $has_next = $this->common->count_all_results('sys_dict_dir', array('parent_id' => $id));
             if ($has_next > 0) {
-                throw new Exception('存在下级数据，请勿删除');
+                throw new Exception('已被使用，禁止删除', '1');
             }
             //检查是否存在字典
             $has_dict = $this->common->count_all_results('sys_dict', "dict_dir_id='$id'");
             if ($has_dict > 0) {
-                throw new Exception('存在字典项，请勿删除');
+                throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('sys_dict_dir', array('id' => $id));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -121,7 +121,7 @@ class Dict_dir extends MY_Controller
         }
         $count = $this->common->count_all_results('sys_dict_dir', $where);
         if ($count > 0) {
-            throw new Exception("Key为 $key 的数据已存在");
+            throw new Exception('不合法的 KEY');
         }
     }
 }

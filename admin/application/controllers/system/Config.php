@@ -17,9 +17,9 @@ class Config extends MY_Controller
             $result = $this->common->get_data(array(
                 'table' => 'sys_config'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -49,9 +49,9 @@ class Config extends MY_Controller
             } else {
                 $result = $this->common->insert('sys_config', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

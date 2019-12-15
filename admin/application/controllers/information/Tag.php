@@ -30,9 +30,9 @@ class Tag extends MY_Controller
                 'like' => $like,
                 'order_by' => 'sort asc,create_time asc'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ class Tag extends MY_Controller
         try {
             $name = $this->input->post('name');
             if ($name == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $affected_rows = 0;
             foreach (explode(',', $name) as $value) {
@@ -57,9 +57,9 @@ class Tag extends MY_Controller
                 $result = $this->common->replace('info_tag', $values);
                 $affected_rows = (int)$result['affected_rows'] + $affected_rows;
             }
-            return ajax(EXIT_SUCCESS, null, array('affected_rows' => $affected_rows));
+            $this->ajax_output->output('0', null, array('affected_rows' => $affected_rows));
         } catch (Eecption $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

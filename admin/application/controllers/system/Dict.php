@@ -34,9 +34,9 @@ class Dict extends MY_Controller
                 'where' => $where,
                 'order_by' => 'sort asc,create_time asc',
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -52,7 +52,7 @@ class Dict extends MY_Controller
             $name = $this->input->post('name');
             $key = $this->input->post('key');
             if ($dict_dir_id == '' || $dict_dir_key == '' || $name == '' || $key == '') {
-                throw new Exception('缺少参数');
+                throw new Exception('缺少参数', '1');
             }
             $values = array(
                 'name' => $name,
@@ -70,9 +70,9 @@ class Dict extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_dict', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -84,12 +84,12 @@ class Dict extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $result = $this->common->delete('sys_dict', array('id' => $id));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -109,7 +109,7 @@ class Dict extends MY_Controller
         }
         $count = $this->common->count_all_results('sys_dict', $where);
         if ($count > 0) {
-            throw new Exception("Key为 $key 的数据已存在");
+            throw new Exception('不合法的 KEY', '1');
         }
     }
 }

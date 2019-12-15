@@ -28,9 +28,9 @@ class Upload extends MY_Controller
                 'where' => $where,
                 'order_by' => 'create_time desc'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -42,7 +42,7 @@ class Upload extends MY_Controller
         try {
             $field = $this->input->post('field');
             if ($field == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $where = array();
             if ($field != '') {
@@ -54,9 +54,9 @@ class Upload extends MY_Controller
                 'where' => $where,
                 'has_pagination' => '0'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -94,7 +94,7 @@ class Upload extends MY_Controller
             //上传出错
             if (!$this->upload->do_upload('file')) {
                 $error = $this->upload->display_errors('', '');
-                throw new Exception($error);
+                throw new Exception($error, '1');
             }
             $data = $this->upload->data();
             $upload_dir_id = $this->input->post('upload_dir_id');
@@ -121,9 +121,9 @@ class Upload extends MY_Controller
                 'web_path' => $domain_name . $relative_path
             );
             $this->common->insert('upload', $values);
-            return ajax(EXIT_SUCCESS, null, $values);
+            $this->ajax_output->output('0', null, $values);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -135,7 +135,7 @@ class Upload extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $data = $this->common->get_data(array(
                 'table' => 'upload',
@@ -145,9 +145,9 @@ class Upload extends MY_Controller
             $result = $this->common->delete('upload', array('id' => $id));
             //删除文件
             unlink($data['full_path']);
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

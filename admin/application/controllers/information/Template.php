@@ -34,9 +34,9 @@ class Template extends MY_Controller
                 'like' => $like,
                 'order_by' => 'it.sort asc,it.create_time asc'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ class Template extends MY_Controller
             $name = $this->input->post('name');
             $menu_id = $this->input->post('menu_id');
             if ($name == '' || $menu_id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $values = array(
                 'name' => $name,
@@ -63,9 +63,9 @@ class Template extends MY_Controller
             } else {
                 $result = $this->common->insert('info_template', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -77,17 +77,17 @@ class Template extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             //检查模板是否在使用
             $count = $this->common->count_all_results('info_column', "template_id = $id");
             if ($count > 0) {
-                throw new Exception('模板正在使用，请勿删除！');
+                throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('info_template', array('id' => $id));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

@@ -34,9 +34,9 @@ class User extends MY_Controller
                 'group_by' => 'su.id',
                 'order_by' => 'su.sort asc,su.create_time asc'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -68,9 +68,9 @@ class User extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_user', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -79,14 +79,14 @@ class User extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             // 检查是否超级管理员
             $this->_is_super($id);
             $result = $this->common->delete('sys_user', array('id' => $id));
-            return ajax(EXIT_SUCCESS, '删除成功', $result);
+            $this->ajax_output->output('0', '删除成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

@@ -17,9 +17,9 @@ class File extends MY_Controller
             $result = $this->common->get_list(array(
                 'table' => $table
             ));
-            return ajax(EXIT_SUCCESS, NULL, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -38,17 +38,16 @@ class File extends MY_Controller
                     'name' => $name
                 );
                 $result = $this->common->update('upload_dir', array('id' => $id), $values);
-            }
-            // 文件
+            } // 文件
             elseif ($type == '2') {
                 $values = array(
                     'file_name' => $name
                 );
                 $result = $this->common->update('upload', array('id' => $id), $values);
             }
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, null);
+            $this->ajax_output->output($e->getCode(), null);
         }
     }
 
@@ -67,17 +66,16 @@ class File extends MY_Controller
                     'parent_id' => $parent_id
                 );
                 $result = $this->common->update('upload_dir', array('id' => $id), $values);
-            }
-            // 文件
+            } // 文件
             elseif ($type == '2') {
                 $values = array(
                     'upload_dir_id' => $parent_id
                 );
                 $result = $this->common->update('upload', array('id' => $id), $values);
             }
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Eeception $e) {
-            return ajax(EXIT_ERROR, null);
+            $this->ajax_output->output($e->getCode(), null);
         }
 
     }

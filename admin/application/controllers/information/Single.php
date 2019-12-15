@@ -16,7 +16,7 @@ class Single extends MY_Controller
         try {
             $column_id = $this->input->get('column_id');
             if ($column_id == '') {
-                throw new Exception('缺少参数');
+                throw new Exception('缺少参数', '1');
             }
             $where = array();
             if ($column_id != '') {
@@ -26,9 +26,9 @@ class Single extends MY_Controller
                 'table' => 'info_single is',
                 'where' => $where
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ class Single extends MY_Controller
         try {
             $column_id = $this->input->post('column_id');
             if ($column_id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             $values = array(
                 'column_id' => $column_id,
@@ -48,9 +48,9 @@ class Single extends MY_Controller
                 'content' => $this->input->post('content')
             );
             $result = $this->common->replace('info_single', $values);
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Eecption $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

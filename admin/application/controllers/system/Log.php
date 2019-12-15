@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Login_log extends MY_Controller
+class Log extends MY_Controller
 {
 
     /**
@@ -20,9 +20,9 @@ class Login_log extends MY_Controller
                 'table' => 'sys_login_log',
                 'order_by' => 'create_time asc'
             ));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 

@@ -31,9 +31,9 @@ class Menu extends MY_Controller
             if ($is_tree == '1') {
                 $result['list'] = list_to_tree($result['list']);
             }
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -65,9 +65,9 @@ class Menu extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_menu', $values);
             }
-            return ajax(EXIT_SUCCESS, '保存成功', $result);
+            $this->ajax_output->output('0', '保存成功', $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -79,17 +79,17 @@ class Menu extends MY_Controller
         try {
             $id = $this->input->post('id');
             if ($id == '') {
-                throw new Exception('参数不完整');
+                throw new Exception('缺少参数', '1');
             }
             // 检查是否含有下级
             $has_next = $this->common->count_all_results('sys_menu', array('parent_id' => $id));
             if ($has_next > 0) {
-                throw new Exception('存在下级数据，请勿删除');
+                throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('sys_menu', array('id' => $id));
-            return ajax(EXIT_SUCCESS, null, $result);
+            $this->ajax_output->output('0', null, $result);
         } catch (Exception $e) {
-            return ajax(EXIT_ERROR, $e->getMessage());
+            $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 }
