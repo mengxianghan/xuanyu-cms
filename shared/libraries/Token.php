@@ -99,40 +99,42 @@ class Token
     public function validate()
     {
         try {
-            //验证token是否存在
-            if (!isset($_SERVER['HTTP_TOKEN'])) {
-                throw new Exception('签名无效');
+            //不验证白名单
+            if (!$this->_is_white_list()) {
+                //验证token是否存在
+                if (!isset($_SERVER['HTTP_TOKEN'])) {
+                    throw new Exception('签名无效', 3);
+                }
+                //将获取的token转成数组
+                $token = explode('.', $_SERVER['HTTP_TOKEN']);
+                //验证token长度
+                if (count($token) < 3) {
+                    throw new Exception('签名无效', 3);
+                }
+                list($header64, $payload64, $signature) = $token;
+                //验证token中的header和payload部分
+                if ($this->_signature($header64, $payload64) !== $signature) {
+                    throw new Exception('签名无效', 3);
+                }
+                //解密header
+                $header = $this->_decode($header64);
+                //解密payload
+                $payload = $this->_decode($payload64);
+                //验证header部分
+                if ($header['type'] != $this->type || $header['alg'] != $this->alg) {
+                    throw new Exception('签名无效', 3);
+                }
+                //验证payload部分
+                if ($payload['iss'] != $this->iss) {
+                    throw new Exception('签名无效', 3);
+                }
+                //验证是否超时
+                //if (isset($payload['exp']) && $payload['exp'] < time()) {
+                //    throw new Exception('签名已过期，请重新登录');
+                //}
             }
-            //将获取的token转成数组
-            $token = explode('.', $_SERVER['HTTP_TOKEN']);
-            //验证token长度
-            if (count($token) < 3) {
-                throw new Exception('签名无效');
-            }
-            list($header64, $payload64, $signature) = $token;
-            //验证token中的header和payload部分
-            if ($this->_signature($header64, $payload64) !== $signature) {
-                throw new Exception('签名无效');
-            }
-            //解密header
-            $header = $this->_decode($header64);
-            //解密payload
-            $payload = $this->_decode($payload64);
-            //验证header部分
-            if ($header['type'] != $this->type || $header['alg'] != $this->alg) {
-                throw new Exception('签名无效');
-            }
-            //验证payload部分
-            if ($payload['iss'] != $this->iss) {
-                throw new Exception('签名无效');
-            }
-            //验证是否超时
-            //if (isset($payload['exp']) && $payload['exp'] < time()) {
-            //    throw new Exception('签名已过期，请重新登录');
-            //}
         } catch (Exception $e) {
-            echo ajax(3, $e->getMessage());
-            exit;
+            $this->ci->ajax_output->output($e->getCode(), $e->getMessage());
         }
     }
 
@@ -146,5 +148,23 @@ class Token
         list($header64, $payload64, $signature) = $token;
         $payload = $this->_decode($payload64);
         return isset($payload['user_id']) ? $payload['user_id'] : '';
+    }
+
+    /**
+     * 是否在白名单
+     * @return bool
+     */
+    private function _is_white_list()
+    {
+        $class = strtolower($this->ci->router->fetch_directory() . $this->ci->router->fetch_class());
+        $method = strtolower($this->ci->router->fetch_method());
+        $white_list = $this->ci->config->item('white_list');
+        $value = isset($white_list[$class]) ? $white_list[$class] : '';
+        if ($value == '') return false;
+        if ($value == '*') return true;
+        if (is_array($value) && in_array($value, $method)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -16,17 +16,26 @@ class Ajax_output
 
     /**
      * 输出
-     * @param       $code
-     * @param       $message
-     * @param array $data
+     * @param       $code    //状态码
+     * @param       $message //状态信息
+     * @param array $data    //结果集
+     * @param       $log     //是否记录日志
      */
-    public function output($code, $message, $data = array())
+    public function output($code, $message, $data = array(), $log = true)
     {
+        $code = (string)$code;
         $result = array(
-            "code" => (string)$code,
+            "code" => $code,
             "message" => (string)$message,
             "data" => $this->_format($data)
         );
+        if ($log) {
+            if ($code === '200') {
+                $this->ci->logs->record('2');//操作日志
+            } else {
+                $this->ci->logs->record('3');//异常日志
+            }
+        }
         exit(json_encode($result));
     }
 
