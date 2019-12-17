@@ -31,7 +31,7 @@ class Menu extends MY_Controller
             if ($is_tree == '1') {
                 $result['list'] = list_to_tree($result['list']);
             }
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -65,7 +65,7 @@ class Menu extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_menu', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -87,7 +87,7 @@ class Menu extends MY_Controller
                 throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('sys_menu', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

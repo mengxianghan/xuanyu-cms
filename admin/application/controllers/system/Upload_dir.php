@@ -28,7 +28,7 @@ class Upload_dir extends MY_Controller
                 'has_pagination' => '0',
             ));
             $result['list'] = list_to_tree($result['list']);
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -54,7 +54,7 @@ class Upload_dir extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('upload_dir', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -76,7 +76,7 @@ class Upload_dir extends MY_Controller
                 throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('upload_dir', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

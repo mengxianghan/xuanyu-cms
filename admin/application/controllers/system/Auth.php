@@ -69,7 +69,7 @@ class Auth extends MY_Controller
                 'has_pagination' => '0'
             ));
             $result['list'] = list_to_tree($result['list']);
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -94,7 +94,7 @@ class Auth extends MY_Controller
                 ),
                 'has_pagination' => '0'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -118,7 +118,7 @@ class Auth extends MY_Controller
             if (count($values)) {
                 $this->db->insert_batch('sys_auth', $values);
             }
-            $this->ajax_output->output('0', '保存成功');
+            $this->ajax_output->output('200', '保存成功');
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

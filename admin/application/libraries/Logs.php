@@ -4,6 +4,8 @@
  * Class Logs
  */
 
+use Ramsey\Uuid\Uuid;
+
 class Logs
 {
     protected $ci;
@@ -11,22 +13,26 @@ class Logs
     public function __construct()
     {
         $this->ci =& get_instance();
+        $this->ci->load->library('user_agent');
     }
 
     /**
-     * 写日志
-     * @param string $type
+     * 记录日志
+     * @param string $type //日志类型，1=登录日志，2=操作日志，3=异常日志
+     * @param string $user_id
      */
-    public function write($type = '')
+    public function record($type = '', $user_id = '')
     {
-        $user_id = $this->token->get_user_id();
+        $user_id = $user_id ?: $this->ci->token->get_user_id();
+        $id = Uuid::uuid4();
         $values = array(
+            'id' => $id,
             'type' => $type,
             'user_id' => $user_id,
-            'api' => $this->uri->uri_string(),
+            'api' => $this->ci->uri->uri_string(),
             'params' => json_encode($_REQUEST),
-            'browser' => $this->input->user_agent(),
-            'ip' => $this->input->ip_address()
+            'browser' => $this->ci->agent->browser() . ' ' . $this->ci->agent->version(),
+            'ip' => $this->ci->input->ip_address()
         );
         $this->ci->common->insert('sys_log', $values);
     }

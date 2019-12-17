@@ -54,7 +54,9 @@ class Login extends MY_Controller
                 'last_login_time' => $last_login_log ? $last_login_log['create_time'] : '',
                 'token' => $this->token->create($user_info['id'])
             );
-            $this->ajax_output->output('0', '登录成功', $result);
+            //记录日志
+            $this->logs->record('1', $result['id']);
+            $this->ajax_output->output('200', '登录成功', $result, false);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

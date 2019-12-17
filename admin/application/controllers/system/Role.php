@@ -36,7 +36,7 @@ class Role extends MY_Controller
                 'order_by' => 'sort asc,create_time asc',
                 'like' => $like
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -64,7 +64,7 @@ class Role extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_role', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -83,7 +83,7 @@ class Role extends MY_Controller
             //是否超级管理员
             $this->_is_super($id);
             $result = $this->common->delete('sys_role', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

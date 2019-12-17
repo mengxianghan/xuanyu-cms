@@ -34,7 +34,7 @@ class User extends MY_Controller
                 'group_by' => 'su.id',
                 'order_by' => 'su.sort asc,su.create_time asc'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -68,7 +68,7 @@ class User extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_user', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -84,7 +84,7 @@ class User extends MY_Controller
             // 检查是否超级管理员
             $this->_is_super($id);
             $result = $this->common->delete('sys_user', array('id' => $id));
-            $this->ajax_output->output('0', '删除成功', $result);
+            $this->ajax_output->output('200', '删除成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

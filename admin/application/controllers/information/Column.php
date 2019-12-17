@@ -29,7 +29,7 @@ class Column extends MY_Controller
                 'join' => array('info_template it', 'it.id = ic.template_id', 'left')
             ));
             $result['list'] = list_to_tree($result['list']);
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -58,7 +58,7 @@ class Column extends MY_Controller
             } else {
                 $result = $this->common->insert('info_column', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -81,7 +81,7 @@ class Column extends MY_Controller
                 throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('info_column', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

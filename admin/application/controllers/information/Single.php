@@ -26,7 +26,7 @@ class Single extends MY_Controller
                 'table' => 'info_single is',
                 'where' => $where
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -48,7 +48,7 @@ class Single extends MY_Controller
                 'content' => $this->input->post('content')
             );
             $result = $this->common->replace('info_single', $values);
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Eecption $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

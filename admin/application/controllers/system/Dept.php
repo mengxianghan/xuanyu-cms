@@ -29,7 +29,7 @@ class Dept extends MY_Controller
                 'has_pagination' => '0'
             ));
             $result['list'] = list_to_tree($result['list']);
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -57,7 +57,7 @@ class Dept extends MY_Controller
                 $values['id'] = Uuid::uuid4();
                 $result = $this->common->insert('sys_dept', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -85,7 +85,7 @@ class Dept extends MY_Controller
                 throw new Exception('最后一条数据，禁止删除', '1');
             }
             $result = $this->common->delete('sys_dept', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

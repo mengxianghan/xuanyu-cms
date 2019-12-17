@@ -34,7 +34,7 @@ class Template extends MY_Controller
                 'like' => $like,
                 'order_by' => 'it.sort asc,it.create_time asc'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -63,7 +63,7 @@ class Template extends MY_Controller
             } else {
                 $result = $this->common->insert('info_template', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -85,7 +85,7 @@ class Template extends MY_Controller
                 throw new Exception('已被使用，禁止删除', '1');
             }
             $result = $this->common->delete('info_template', array('id' => $id));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

@@ -41,7 +41,7 @@ class News extends MY_Controller
                 'order_by' => 'in.sort desc,in.create_time desc',
                 'join' => array('info_column ic', 'ic.id = in.column_id', 'left')
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -81,7 +81,7 @@ class News extends MY_Controller
             } else {
                 $result = $this->common->insert('info_news', $values);
             }
-            $this->ajax_output->output('0', '保存成功', $result);
+            $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -98,7 +98,7 @@ class News extends MY_Controller
                 throw new Exception('缺少参数', '1');
             }
             $result = $this->common->delete('info_news', array('id' => explode(',', $id)));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

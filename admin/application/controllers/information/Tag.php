@@ -30,7 +30,7 @@ class Tag extends MY_Controller
                 'like' => $like,
                 'order_by' => 'sort asc,create_time asc'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -57,7 +57,7 @@ class Tag extends MY_Controller
                 $result = $this->common->replace('info_tag', $values);
                 $affected_rows = (int)$result['affected_rows'] + $affected_rows;
             }
-            $this->ajax_output->output('0', null, array('affected_rows' => $affected_rows));
+            $this->ajax_output->output('200', null, array('affected_rows' => $affected_rows));
         } catch (Eecption $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }

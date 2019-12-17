@@ -17,7 +17,7 @@ class File extends MY_Controller
             $result = $this->common->get_list(array(
                 'table' => $table
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -45,7 +45,7 @@ class File extends MY_Controller
                 );
                 $result = $this->common->update('upload', array('id' => $id), $values);
             }
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), null);
         }
@@ -73,7 +73,7 @@ class File extends MY_Controller
                 );
                 $result = $this->common->update('upload', array('id' => $id), $values);
             }
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Eeception $e) {
             $this->ajax_output->output($e->getCode(), null);
         }

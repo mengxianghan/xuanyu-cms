@@ -28,7 +28,7 @@ class Upload extends MY_Controller
                 'where' => $where,
                 'order_by' => 'create_time desc'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -54,7 +54,7 @@ class Upload extends MY_Controller
                 'where' => $where,
                 'has_pagination' => '0'
             ));
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -121,7 +121,7 @@ class Upload extends MY_Controller
                 'web_path' => $domain_name . $relative_path
             );
             $this->common->insert('upload', $values);
-            $this->ajax_output->output('0', null, $values);
+            $this->ajax_output->output('200', null, $values);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
@@ -145,7 +145,7 @@ class Upload extends MY_Controller
             $result = $this->common->delete('upload', array('id' => $id));
             //删除文件
             unlink($data['full_path']);
-            $this->ajax_output->output('0', null, $result);
+            $this->ajax_output->output('200', null, $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());
         }
