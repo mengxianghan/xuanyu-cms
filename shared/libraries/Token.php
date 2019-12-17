@@ -144,8 +144,8 @@ class Token
      */
     public function get_user_id()
     {
-        $token = explode('.', $_SERVER['HTTP_TOKEN']);
-        list($header64, $payload64, $signature) = $token;
+        $token = isset($_SERVER['HTTP_TOKEN']) ? explode('.', $_SERVER['HTTP_TOKEN']) : array();
+        list($header64, $payload64, $signature) = array_pad($token, 3, '');
         $payload = $this->_decode($payload64);
         return isset($payload['user_id']) ? $payload['user_id'] : '';
     }
