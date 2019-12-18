@@ -7,9 +7,12 @@
 xuanyu CMS是一款前后端分离快速后台开发框架，前端基于vue-ant-design，后端基于codeigniter轻量级php框架开发
 
 具体功能请参考前端描述文件  
-前端请移步至  
+前端  
 Github地址：[https://github.com/mengxianghan/xuanyu-cms-front](https://github.com/mengxianghan/xuanyu-cms-front)  
-码云地址：[https://gitee.com/1056811341/xuanyu-cms-front](https://gitee.com/1056811341/xuanyu-cms-front)
+码云地址：[https://gitee.com/1056811341/xuanyu-cms-front](https://gitee.com/1056811341/xuanyu-cms-front)  
+后端  
+Github地址：[https://github.com/mengxianghan/xuanyu-cms](https://github.com/mengxianghan/xuanyu-cms)  
+码云地址：[https://gitee.com/1056811341/xuanyu-cms](https://gitee.com/1056811341/xuanyu-cms)
 ## 安装
 
 ```
@@ -20,6 +23,5 @@ composer install
 ## 配置
 
 修改数据库连接 `shared/config/database.php`  
-其他配置信息请移步至
+其他配置信息请参考
 <a href="http://codeigniter.org.cn/user_guide/" target="_blank">Codeigniter 手册</a>
-进行配置
