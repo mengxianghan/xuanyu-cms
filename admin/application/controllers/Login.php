@@ -10,6 +10,7 @@ class Login extends MY_Controller
      */
     public function sign_in()
     {
+        $user_id = '';
         try {
             $username = $this->input->post('username');
             $password = $this->input->post('password');
@@ -24,6 +25,7 @@ class Login extends MY_Controller
             }
             // 验证密码
             $user_info = $this->_valid_password($user_list, $password);
+            $user_id = $user_info['id'];
             if (!is_array($user_info)) {
                 throw new Exception('密码错误', '1');
             }
@@ -38,14 +40,9 @@ class Login extends MY_Controller
             }
             // 最后一次登录日志
             $last_login_log = $this->common->get_data(array(
-                'table' => 'sys_login_log',
-                'where' => array('user_id' => $user_info['id']),
+                'table' => 'sys_log',
+                'where' => array('user_id' => $user_info['id'], 'type' => '1'),
                 'order_by' => 'create_time desc'
-            ));
-            // 添加登录日志
-            $this->common->insert('sys_login_log', array(
-                'id' => Uuid::uuid4(),
-                'user_id' => $user_info['id']
             ));
             $result = array(
                 'id' => $user_info['id'],
@@ -55,10 +52,22 @@ class Login extends MY_Controller
                 'token' => $this->token->create($user_info['id'])
             );
             //记录日志
-            $this->logs->record('1', $result['id']);
-            $this->ajax_output->output('200', '登录成功', $result, false);
+            $code = '200';
+            $message = '登录成功';
+            $this->logs->record('1', array(
+                'user_id' => $user_id,
+                'code' => $code,
+                'message' => '登录成功'
+            ));
+            $this->ajax_output->output($code, $message, $result, false);
         } catch (Exception $e) {
-            $this->ajax_output->output($e->getCode(), $e->getMessage());
+            //记录日志
+            $this->logs->record('1', array(
+                'user_id' => $user_id,
+                'code' => $e->getCode(),
+                'message' => $e->getMessage()
+            ));
+            $this->ajax_output->output($e->getCode(), $e->getMessage(), null, false);
         }
     }
 

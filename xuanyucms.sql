@@ -11,7 +11,7 @@
  Target Server Version : 50724
  File Encoding         : 65001
 
- Date: 17/12/2019 23:44:42
+ Date: 18/12/2019 20:17:30
 */
 
 SET NAMES utf8mb4;
@@ -328,106 +328,33 @@ CREATE TABLE `sys_log`  (
   `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '日志类型：1=登录日志，2=操作日志，3=异常日志',
   `user_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户',
   `api` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '接口地址',
-  `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '参数',
+  `params` text CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '请求参数',
   `browser` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '浏览器信息',
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '访问IP',
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态码',
+  `message` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态信息',
   `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统-登录日志表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统-日志表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
-INSERT INTO `sys_log` VALUES ('1e6a9e9e-37e7-4d16-8a09-3c645c090d3a', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:41:44');
-INSERT INTO `sys_log` VALUES ('29440f0c-2523-4a39-b035-25a2770a679b', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:06:54');
-INSERT INTO `sys_log` VALUES ('32c42304-f1ce-4e7b-b07e-e016983a812f', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:26:56');
-INSERT INTO `sys_log` VALUES ('33e62b4c-f11a-4cd1-9885-64fdf4260511', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:22:53');
-INSERT INTO `sys_log` VALUES ('35f14c98-54a0-48ef-9c46-ebc23bb02b0e', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:42:21');
-INSERT INTO `sys_log` VALUES ('517336bb-179b-4854-8a17-0a1bc90245dd', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:21:58');
-INSERT INTO `sys_log` VALUES ('614d523e-478c-4b8e-842d-77476cf899b1', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:21:58');
-INSERT INTO `sys_log` VALUES ('635670a7-4197-458b-bd9b-2a91de5d8e84', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 22:14:46');
-INSERT INTO `sys_log` VALUES ('714aefa9-4531-4ae8-88b8-eb07751d57a5', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:05:59');
-INSERT INTO `sys_log` VALUES ('78254da3-17b3-4fbe-b0d5-a34508ac7f55', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/dict_dir/get_list', '{\"status\":\"1\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:32:01');
-INSERT INTO `sys_log` VALUES ('80d52ac3-e866-465b-bbec-3fd6149ee8e7', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:40:54');
-INSERT INTO `sys_log` VALUES ('89b017d8-f97f-4f92-9283-32923d2d3c35', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:06:54');
-INSERT INTO `sys_log` VALUES ('8a19df34-2522-469d-aad1-4d88aed9c4f9', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:39:59');
-INSERT INTO `sys_log` VALUES ('92044099-9f98-4463-95c1-3b356e51291d', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:29:14');
-INSERT INTO `sys_log` VALUES ('c6e42117-a44e-4512-9bd8-f3f2efab7a26', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:26:56');
-INSERT INTO `sys_log` VALUES ('c8630cb7-5c0f-40a0-9473-8c6627707a75', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:39:32');
-INSERT INTO `sys_log` VALUES ('cbcdc360-01fe-4b63-8c75-4b3a9ed1e2ce', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:26:57');
-INSERT INTO `sys_log` VALUES ('df5248b5-7d6e-41ed-b8cf-15faff20b955', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:39:32');
-INSERT INTO `sys_log` VALUES ('ea7b796c-e9c2-4574-8e90-b76fc2be8ce1', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/dict/get_list', '{\"dict_dir_id\":\"\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:32:01');
-INSERT INTO `sys_log` VALUES ('ee067f27-6544-4588-a8fd-54a01b467773', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:05:59');
-INSERT INTO `sys_log` VALUES ('f80a60d3-0d67-4bdb-bedb-69874c863994', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:28:20');
-INSERT INTO `sys_log` VALUES ('fbbabd99-a9ba-4ef2-bf5f-3276c4029a61', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '2019-12-17 23:37:14');
-
--- ----------------------------
--- Table structure for sys_login_log
--- ----------------------------
-DROP TABLE IF EXISTS `sys_login_log`;
-CREATE TABLE `sys_login_log`  (
-  `id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统-登录日志表' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of sys_login_log
--- ----------------------------
-INSERT INTO `sys_login_log` VALUES ('025006f2-aef5-4929-8fcc-3cdbe2d86bc4', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:40:28');
-INSERT INTO `sys_login_log` VALUES ('02f45a02-833d-4b52-88b0-731e611bc643', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:20:34');
-INSERT INTO `sys_login_log` VALUES ('07769c97-0d2f-4446-a273-14674c7fce28', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:39:54');
-INSERT INTO `sys_login_log` VALUES ('0c903764-fcf4-473c-bdcd-60def48f9959', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:36:29');
-INSERT INTO `sys_login_log` VALUES ('1a03a962-603b-4e41-82a7-dcefcdbef98c', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:27:41');
-INSERT INTO `sys_login_log` VALUES ('1a792ab2-7315-472b-8e27-b8937ca4d765', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:34:23');
-INSERT INTO `sys_login_log` VALUES ('1f209656-b739-4cdd-908e-07519cb2c744', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 13:09:52');
-INSERT INTO `sys_login_log` VALUES ('22c8f5e0-728f-463c-837a-69936bae11ad', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:23:58');
-INSERT INTO `sys_login_log` VALUES ('36c6dfe1-8382-4347-9662-bdc199883906', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:25:06');
-INSERT INTO `sys_login_log` VALUES ('3c836054-19fe-471b-b1b4-3a7c913a8d23', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 11:51:19');
-INSERT INTO `sys_login_log` VALUES ('3d912c04-78fd-4ebf-ad53-18cf2a384662', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 14:07:08');
-INSERT INTO `sys_login_log` VALUES ('4af13e5c-9c6a-4124-9108-51014cac141d', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:27:28');
-INSERT INTO `sys_login_log` VALUES ('56d1fefe-2d85-4ead-b519-8fa0182b44ad', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:35:12');
-INSERT INTO `sys_login_log` VALUES ('5f7143d5-4f50-4a98-b41d-d0832b52f83b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 13:27:08');
-INSERT INTO `sys_login_log` VALUES ('6b2852e0-185f-4ba4-912a-9f8011e2a082', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:27:02');
-INSERT INTO `sys_login_log` VALUES ('70d8ad77-86eb-478d-ae4f-4e390512b560', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:40:12');
-INSERT INTO `sys_login_log` VALUES ('7a1632d4-8479-457f-896f-b1cb6a29d740', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:19:20');
-INSERT INTO `sys_login_log` VALUES ('7e2a992b-e163-4660-9d0a-42b1806e4ae2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:28:02');
-INSERT INTO `sys_login_log` VALUES ('800a6193-267b-449c-9ea0-d51eb88d8f17', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:07:28');
-INSERT INTO `sys_login_log` VALUES ('84c34bd3-11aa-479b-9fd0-77c40c47fb75', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 13:37:56');
-INSERT INTO `sys_login_log` VALUES ('86778454-3f83-455a-967f-93ad8ee86bc0', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:07:58');
-INSERT INTO `sys_login_log` VALUES ('8d23fe6a-c617-424c-a1db-2a63a363ab83', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:26:29');
-INSERT INTO `sys_login_log` VALUES ('8f708100-134d-4b42-98cc-f3d77fd3edaf', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:21:45');
-INSERT INTO `sys_login_log` VALUES ('90f1d622-126a-46a8-ab10-ec4108edafb5', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:47:37');
-INSERT INTO `sys_login_log` VALUES ('93949a1a-e7ed-4903-8e7c-19f77b7a3503', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-16 20:28:54');
-INSERT INTO `sys_login_log` VALUES ('96f29193-afe9-436a-8ebc-8a2572110aa2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-07 09:06:03');
-INSERT INTO `sys_login_log` VALUES ('9961463c-129a-46e1-8898-1e792d741a67', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:32:58');
-INSERT INTO `sys_login_log` VALUES ('9d50f104-e128-4f3d-8662-98cb92ea2b05', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:15:38');
-INSERT INTO `sys_login_log` VALUES ('a0c5fbb1-6c90-4703-8be6-16423078d61a', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:20:52');
-INSERT INTO `sys_login_log` VALUES ('a5efd78c-10ee-4fba-a96a-40375d5b827d', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:17:24');
-INSERT INTO `sys_login_log` VALUES ('a9395e0e-edda-4178-97e9-b39e9dfd409b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-03 14:11:19');
-INSERT INTO `sys_login_log` VALUES ('b27fdc91-42cc-414c-977e-8495afddb184', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:20:25');
-INSERT INTO `sys_login_log` VALUES ('b6caf0b5-94a2-4527-b73b-a150876db26f', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:21:59');
-INSERT INTO `sys_login_log` VALUES ('b7821128-1605-49d9-a686-096ccfb6859e', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:30:40');
-INSERT INTO `sys_login_log` VALUES ('b92303bd-6664-4b47-9946-ed3a0863912a', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 17:27:15');
-INSERT INTO `sys_login_log` VALUES ('b9e6853a-8795-4fbe-a464-cdd4e035d467', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:34:37');
-INSERT INTO `sys_login_log` VALUES ('bd4e3c89-f45b-4548-8a7e-80925cba16ea', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-06 21:58:00');
-INSERT INTO `sys_login_log` VALUES ('bd5473e4-ef92-47b9-8a76-8e3706475025', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:34:03');
-INSERT INTO `sys_login_log` VALUES ('bf513d21-0194-4977-bdf4-eba4fae1000d', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 16:08:37');
-INSERT INTO `sys_login_log` VALUES ('c045aaec-d501-4b34-9680-1f90927abc51', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 14:01:02');
-INSERT INTO `sys_login_log` VALUES ('c4ab56e4-f550-426e-96a0-f4efc1b15c1b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:23:41');
-INSERT INTO `sys_login_log` VALUES ('c970c6bc-b30b-4885-8d3a-23f4b7dfbb97', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 08:54:40');
-INSERT INTO `sys_login_log` VALUES ('d0eaf534-7cff-4c74-9dd9-74729d89c91f', 'd35ea05e-100e-4902-80f9-8106d602ec94', '2019-12-03 15:10:41');
-INSERT INTO `sys_login_log` VALUES ('d318662c-dd43-41d2-aee3-336f1ac54c58', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:38:56');
-INSERT INTO `sys_login_log` VALUES ('d3ef7520-d154-46b6-82a5-e0ef3731e94c', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-17 21:26:57');
-INSERT INTO `sys_login_log` VALUES ('d5293102-7988-4d72-be4b-b705d36ee54b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-04 15:38:28');
-INSERT INTO `sys_login_log` VALUES ('d719b64a-1b7e-4b4e-afd4-16b5d26bd406', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-05 15:08:35');
-INSERT INTO `sys_login_log` VALUES ('dbdec705-83a6-41c7-b686-12ee3cf61526', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:26:46');
-INSERT INTO `sys_login_log` VALUES ('e06fe405-cc7e-4983-843d-2c67045e7a05', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:38:12');
-INSERT INTO `sys_login_log` VALUES ('e8c0d6f2-c466-4f5b-bbad-68d683bd3545', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-03 14:11:07');
-INSERT INTO `sys_login_log` VALUES ('f8cdc850-8b0e-4a19-9c2d-fa77db892513', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-15 21:39:10');
-INSERT INTO `sys_login_log` VALUES ('fc764c97-cca1-42cc-bb88-fba75355345b', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-17 21:23:34');
-INSERT INTO `sys_login_log` VALUES ('fe88e2f6-d08d-43fb-8e26-e1f92cace7b2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', '2019-12-17 21:31:23');
+INSERT INTO `sys_log` VALUES ('18837794-3089-4b72-8c02-aaa2d2e732cf', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/menu/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:06:52');
+INSERT INTO `sys_log` VALUES ('3176ec7f-5d63-4925-a29e-c4ffaae8baa1', '1', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'login/sign_in', '{\"username\":\"admin\",\"password\":\"123456\"}', 'Chrome 78.0.3904.97', '::1', '200', '登录成功', '2019-12-18 20:11:02');
+INSERT INTO `sys_log` VALUES ('562be700-f3b0-4bbb-98d7-1ff3a9d7ccbb', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:11:02');
+INSERT INTO `sys_log` VALUES ('5953c665-d276-40b6-a252-314332294b3f', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:11:02');
+INSERT INTO `sys_log` VALUES ('7a235736-5b8c-48f5-9dcb-71ba2334567b', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '{\"site\":\"zh\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:08:11');
+INSERT INTO `sys_log` VALUES ('7c323a10-0d7d-4bb4-a414-28d69869bda0', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/config/get_data', '[]', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:06:03');
+INSERT INTO `sys_log` VALUES ('819431ee-5f7b-4a18-99ae-25272697c026', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '{\"status\":\"1\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:07:01');
+INSERT INTO `sys_log` VALUES ('86420a97-f0c1-44e3-bbe7-867f7fc26781', '1', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'login/sign_in', '{\"username\":\"admin\",\"password\":\"123456\"}', 'Chrome 78.0.3904.97', '::1', '200', '登录成功', '2019-12-18 20:08:10');
+INSERT INTO `sys_log` VALUES ('89e05ed5-fcdd-4c74-b2bf-c6dd97859d22', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/menu/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:07:03');
+INSERT INTO `sys_log` VALUES ('8cb6bfb4-d87e-4ee0-98c4-1645de2e0f20', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/menu/submit', '{\"id\":\"fc9ccb9b-9f78-4de4-a8d0-5a7153d249ba\",\"parent_id\":\"0\",\"name\":\"\\u63a7\\u5236\\u53f0\",\"icon\":\"dashboard\",\"route_path\":\"\\/workplace\",\"route_name\":\"workplace\",\"route_component\":\"layouts\\/basicLayout\",\"auth_button_id\":\"\",\"hidden\":\"0\",\"status\":\"1\",\"sort\":\"99\"}', 'Chrome 78.0.3904.97', '::1', '200', '保存成功', '2019-12-18 20:07:02');
+INSERT INTO `sys_log` VALUES ('9a661985-b7e0-4f74-8ed1-e5c3075cd134', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth/get_menu_list', '{\"id\":\"6b525f59-1a3a-48d6-8483-a75ace5304f9\",\"type\":\"2\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:08:10');
+INSERT INTO `sys_log` VALUES ('da812a2c-0053-453f-b269-f34076e7d5d8', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/auth_button/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:07:42');
+INSERT INTO `sys_log` VALUES ('e072213a-baf9-448f-9a27-77a016539f8a', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/menu/get_list', '[]', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:06:59');
+INSERT INTO `sys_log` VALUES ('e88595c6-c3b4-40a6-b7e2-743bfa62d7de', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/dict/get_list', '{\"dict_dir_id\":\"\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:07:43');
+INSERT INTO `sys_log` VALUES ('f1c342f0-198d-4bda-beb4-a9135d33932a', '2', '6b525f59-1a3a-48d6-8483-a75ace5304f9', 'system/dict_dir/get_list', '{\"status\":\"1\"}', 'Chrome 78.0.3904.97', '::1', '200', '', '2019-12-18 20:07:43');
 
 -- ----------------------------
 -- Table structure for sys_menu

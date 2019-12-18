@@ -31,9 +31,9 @@ class Ajax_output
         );
         if ($log) {
             if ($code === '200') {
-                $this->ci->logs->record('2');//操作日志
+                $this->ci->logs->record('2',$result);//操作日志
             } else {
-                $this->ci->logs->record('3');//异常日志
+                $this->ci->logs->record('3',$result);//异常日志
             }
         }
         exit(json_encode($result));
