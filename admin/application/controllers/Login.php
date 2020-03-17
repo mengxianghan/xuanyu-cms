@@ -98,10 +98,9 @@ class Login extends MY_Controller
      */
     private function _valid_password($user_list, $password)
     {
-        $md5_password = md5($password);
         $user_info = null;
         for ($i = 0; $i < count($user_list); $i++) {
-            if ($user_list[$i]['password'] == $md5_password) {
+            if ($user_list[$i]['password'] == $password) {
                 $user_info = $user_list[$i];
                 break;
             }

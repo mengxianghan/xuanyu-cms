@@ -57,6 +57,7 @@ class Dict extends MY_Controller
             $values = array(
                 'name' => $name,
                 'key' => $key,
+                'remark' => $this->input->post('remark'),
                 'dict_dir_id' => $dict_dir_id,
                 'dict_dir_key' => $this->input->post('dict_dir_key'),
                 'status' => $this->input->post('status'),

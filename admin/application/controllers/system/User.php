@@ -10,6 +10,9 @@ use Ramsey\Uuid\Uuid;
 class User extends MY_Controller
 {
 
+    /**
+     * 获取列表
+     */
     public function get_list()
     {
         try {
@@ -40,6 +43,9 @@ class User extends MY_Controller
         }
     }
 
+    /**
+     * 提交
+     */
     public function submit()
     {
         try {
@@ -74,6 +80,9 @@ class User extends MY_Controller
         }
     }
 
+    /**
+     * 删除
+     */
     public function delete()
     {
         try {
