@@ -1,5 +1,5 @@
 <p align="center">
-<img src="http://q219t1n5l.bkt.clouddn.com/logo.svg" height="200" />
+<img src="http://cdn.xuanyunet.com/common/images/logo.svg" height="200" />
 </p>
 
 # xuanyu CMS
@@ -8,8 +8,8 @@ xuanyu CMS是一款前后端分离快速后台开发框架，前端基于vue-ant
 
 具体功能请参考前端描述文件  
 前端  
-Github地址：[https://github.com/mengxianghan/xuanyu-cms-front](https://github.com/mengxianghan/xuanyu-cms-front)  
-码云地址：[https://gitee.com/1056811341/xuanyu-cms-front](https://gitee.com/1056811341/xuanyu-cms-front)  
+Github地址：[https://github.com/mengxianghan/xuanyu-cms-admin](https://github.com/mengxianghan/xuanyu-cms-admin)  
+码云地址：[https://gitee.com/1056811341/xuanyu-cms-admin](https://gitee.com/1056811341/xuanyu-cms-admin)  
 后端  
 Github地址：[https://github.com/mengxianghan/xuanyu-cms](https://github.com/mengxianghan/xuanyu-cms)  
 码云地址：[https://gitee.com/1056811341/xuanyu-cms](https://gitee.com/1056811341/xuanyu-cms)
