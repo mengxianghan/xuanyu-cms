@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Post extends MY_Controller
+class Post extends XY_Controller
 {
 
     public function get_list()

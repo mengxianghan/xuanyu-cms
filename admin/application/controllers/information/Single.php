@@ -5,7 +5,7 @@
  * date      2019/7/16
  */
 
-class Single extends MY_Controller
+class Single extends XY_Controller
 {
 
     /**

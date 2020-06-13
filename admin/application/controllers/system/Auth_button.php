@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Auth_button extends MY_Controller
+class Auth_button extends XY_Controller
 {
 
     public function get_list()

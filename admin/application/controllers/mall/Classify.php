@@ -1,6 +1,6 @@
 <?php
 
-class Classify extends MY_Controller
+class Classify extends XY_Controller
 {
     /**
      * 获取列表

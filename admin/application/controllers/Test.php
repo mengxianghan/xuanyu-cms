@@ -6,7 +6,7 @@
  */
 
 
-class Test extends MY_Controller
+class Test extends XY_Controller
 {
 
     public $id = 0;

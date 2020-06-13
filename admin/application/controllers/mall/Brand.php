@@ -1,6 +1,6 @@
 <?php
 
-class Brand extends MY_Controller
+class Brand extends XY_Controller
 {
 
     public function get_list()

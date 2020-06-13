@@ -1,6 +1,6 @@
 <?php
 
-class Goods extends MY_Controller
+class Goods extends XY_Controller
 {
 
     public function get_list()

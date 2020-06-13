@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Menu extends MY_Controller
+class Menu extends XY_Controller
 {
 
     /**

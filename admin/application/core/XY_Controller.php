@@ -5,7 +5,7 @@
  * date      2019/4/21
  */
 
-class MY_Controller extends CI_Controller
+class XY_Controller extends CI_Controller
 {
     public function __construct()
     {
@@ -15,6 +15,7 @@ class MY_Controller extends CI_Controller
         if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
             exit(200);
         }
+
         //验证token
         $this->token->validate();
     }

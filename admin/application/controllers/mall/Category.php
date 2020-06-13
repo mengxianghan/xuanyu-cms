@@ -1,6 +1,6 @@
 <?php
 
-class Category extends MY_Controller
+class Category extends XY_Controller
 {
     /**
      * 获取列表

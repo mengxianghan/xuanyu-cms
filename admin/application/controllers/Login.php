@@ -2,7 +2,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Login extends MY_Controller
+class Login extends XY_Controller
 {
 
     /**

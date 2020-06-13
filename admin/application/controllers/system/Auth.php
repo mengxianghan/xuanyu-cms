@@ -1,7 +1,7 @@
 <?php
 
 
-class Auth extends MY_Controller
+class Auth extends XY_Controller
 {
     public function __construct()
     {

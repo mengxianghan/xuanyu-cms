@@ -5,7 +5,7 @@
  * date      2019/7/12
  */
 
-class Tag extends MY_Controller
+class Tag extends XY_Controller
 {
 
     /**

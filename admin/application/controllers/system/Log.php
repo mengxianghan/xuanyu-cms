@@ -5,7 +5,7 @@
  * date      2019/6/11
  */
 
-class Log extends MY_Controller
+class Log extends XY_Controller
 {
 
     /**

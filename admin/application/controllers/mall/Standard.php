@@ -1,6 +1,6 @@
 <?php
 
-class Standard extends MY_Controller
+class Standard extends XY_Controller
 {
     /**
      * 获取列表

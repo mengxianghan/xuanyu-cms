@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Dept extends MY_Controller
+class Dept extends XY_Controller
 {
     /**
      * 获取列表

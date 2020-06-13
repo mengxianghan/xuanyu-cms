@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Dict extends MY_Controller
+class Dict extends XY_Controller
 {
 
     /**

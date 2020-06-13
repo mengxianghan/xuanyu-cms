@@ -6,7 +6,7 @@
  */
 
 
-class Column extends MY_Controller
+class Column extends XY_Controller
 {
 
     /**

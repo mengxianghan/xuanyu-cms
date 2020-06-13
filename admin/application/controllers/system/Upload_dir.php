@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Upload_dir extends MY_Controller
+class Upload_dir extends XY_Controller
 {
 
     /**

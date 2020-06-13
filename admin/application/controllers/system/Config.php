@@ -5,7 +5,7 @@
  * date      2019/6/12
  */
 
-class Config extends MY_Controller
+class Config extends XY_Controller
 {
 
     /**
@@ -49,6 +49,7 @@ class Config extends MY_Controller
             } else {
                 $result = $this->common->insert('sys_config', $values);
             }
+
             $this->ajax_output->output('200', '保存成功', $result);
         } catch (Exception $e) {
             $this->ajax_output->output($e->getCode(), $e->getMessage());

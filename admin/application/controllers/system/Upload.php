@@ -7,7 +7,7 @@
 
 use Ramsey\Uuid\Uuid;
 
-class Upload extends MY_Controller
+class Upload extends XY_Controller
 {
     protected $pattern = array('/\\\/', '/\/\//');
     protected $replacement = '/';
@@ -73,8 +73,8 @@ class Upload extends MY_Controller
             $upload_dir = $this->input->post('upload_dir');
             $allowed_file_type = $this->input->post('allowed_file_type');
             $allowed_file_size = $this->input->post('allowed_file_size');
-            //上传路径
             $upload_path = preg_replace($this->pattern, $this->replacement, "../{$upload_dir}/");
+            //上传路径
             $config['upload_path'] = $upload_path;
             //允许上传的文件类型
             $config['allowed_types'] = $allowed_file_type;
@@ -85,7 +85,17 @@ class Upload extends MY_Controller
             //允许上传文件大小的最大值
             $config['max_size'] = (int)$allowed_file_size * 1024;
 
-            //检查上传目录是否存在，不存在时创建
+            //未设置域名
+            if (!$domain_name) {
+                throw new Exception('未设置域名', '1');
+            }
+
+            //未设置上传目录
+            if (!$upload_dir) {
+                throw new Exception('未设置上传目录', '1');
+            }
+
+            //创建上传目录
             if (!is_dir($upload_path)) {
                 mkdir(iconv('UTF-8', 'GBK', $upload_path), 0777, true);
             }

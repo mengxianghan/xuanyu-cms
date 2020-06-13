@@ -5,7 +5,7 @@
  * date      2019/7/5
  */
 
-class Template extends MY_Controller
+class Template extends XY_Controller
 {
 
     /**

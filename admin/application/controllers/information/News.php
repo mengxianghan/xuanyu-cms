@@ -5,7 +5,7 @@
  * date      2019/7/6
  */
 
-class News extends MY_Controller
+class News extends XY_Controller
 {
 
     /**
